@@ -45,7 +45,7 @@ const CreateBlogPost = async (req: Request, res: Response) => {
 };
 
 const DeleteBlogPost = async (req: Request, res: Response) => {
-  const { id: postId } = req.body;
+  const { id: postId } = req.params;
 
   try {
     const deleteResponse = await BlogSchema.deleteOne({ _id: postId });
