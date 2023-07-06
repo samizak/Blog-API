@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+require("dotenv").config();
+
 import {
   GetBlogPosts,
   GetBlogPost,
@@ -10,12 +12,15 @@ import {
 
 export const blogsRouter = Router();
 
+// Get Blog Posts
 blogsRouter.get("/blogs", GetBlogPosts);
-
 blogsRouter.get("/blogs/:id", GetBlogPost);
 
+// Create new Blog Post
 blogsRouter.post("/blogs", CreateBlogPost);
 
+// Update Blog Post
 blogsRouter.put("/blogs/:id", UpdateBlogPost);
 
-blogsRouter.delete("/blogs", DeleteBlogPost);
+// Delete Blog Post
+blogsRouter.delete("/blogs/:id", DeleteBlogPost);
