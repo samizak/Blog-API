@@ -5,7 +5,6 @@ export default async function connectDB() {
     .connect(process.env.MONGO_URL!, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      autoIndex: true,
     } as ConnectOptions)
     .then(() => {
       console.log("Database Connected Successfully.");
