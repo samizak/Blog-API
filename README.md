@@ -13,6 +13,5 @@ This is the backend for a blog application. It is a REST API that allows users t
 * TypeScript
 * MongoDB
 * Express
-* ReactJS
 * NodeJS
 * PassportJS
