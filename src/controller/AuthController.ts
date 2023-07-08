@@ -8,7 +8,11 @@ require("dotenv").config();
 const Login = async (req: Request, res: Response, next: NextFunction) => {
   passport.authenticate("login", async (err: any, user: any, info: any) => {
     try {
-      if (err || !user) {
+      if (!user) {
+        res.status(400).send("User not found");
+        return next();
+      }
+      if (err) {
         const error = new Error("An error occurred.");
         return next(error);
       }
