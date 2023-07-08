@@ -67,11 +67,12 @@ const UpdateBlogPost = async (req: Request, res: Response) => {
   // Check if Title or Message body are empty
   if (!title || !content) return res.status(400).json({ message: "Title and body are required" });
   // Check if Blog Post title is already taken
-  else if (await BlogSchema.isBlogPostTitleTaken(title))
+  else if (await BlogSchema.isBlogPostTitleTaken(title, postId))
     return res.status(400).json({ message: "Title is already taken" });
 
   try {
     const post = await BlogSchema.findByIdAndUpdate(postId, { title, content }, { new: true });
+
     if (post) {
       res.status(200).json({ post });
     } else {
