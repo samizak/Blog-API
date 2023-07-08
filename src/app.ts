@@ -46,8 +46,8 @@ passport.use(
 passport.use(
   new JWTstrategy(
     {
-      secretOrKey: "TOP_SECRET",
-      jwtFromRequest: ExtractJWT.fromUrlQueryParameter("secret_token"),
+      secretOrKey: process.env.JWT_KEY,
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(), //ExtractJWT.fromUrlQueryParameter("secret_token"),
     },
     async (token: any, done: any) => {
       try {
@@ -83,10 +83,6 @@ app.use(express.urlencoded({ extended: true })); // parse urlencoded request bod
 // routes
 app.use("/api/v1/", blogsRouter);
 app.use("/", authRouter);
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
-});
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
