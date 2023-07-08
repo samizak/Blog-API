@@ -1,6 +1,5 @@
 import { Router } from "express";
-
-require("dotenv").config();
+import passport from "passport";
 
 import {
   GetBlogPosts,
@@ -9,6 +8,9 @@ import {
   DeleteBlogPost,
   UpdateBlogPost,
 } from "../controller/BlogPostController";
+import User from "../model/User";
+
+require("dotenv").config();
 
 export const blogsRouter = Router();
 
@@ -17,10 +19,10 @@ blogsRouter.get("/blogs", GetBlogPosts);
 blogsRouter.get("/blogs/:id", GetBlogPost);
 
 // Create new Blog Post
-blogsRouter.post("/blogs", CreateBlogPost);
+blogsRouter.post("/blogs", passport.authenticate("jwt", { session: false }), CreateBlogPost);
 
 // Update Blog Post
-blogsRouter.put("/blogs/:id", UpdateBlogPost);
+blogsRouter.put("/blogs/:id", passport.authenticate("jwt", { session: false }), UpdateBlogPost);
 
 // Delete Blog Post
-blogsRouter.delete("/blogs/:id", DeleteBlogPost);
+blogsRouter.delete("/blogs/:id", passport.authenticate("jwt", { session: false }), DeleteBlogPost);
